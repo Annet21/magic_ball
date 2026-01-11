@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <link rel="stylesheet" href="style.css">
+     <script src="script.js" defer></script> 
+<title> Lab 6 </title>
+</head>
+<body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let style = document.createElement('style');
+        style.innerHTML = `
+            body {
+                background-color: #001529;
+                color: #ffffff;
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 20px;
+                border: 3px solid;
+                border-image: linear-gradient(to bottom left, green, blue) 1;
+            }
+            .question {
+                background-color: #f2ebee;
+                color: black;
+                border-radius: 15px;
+                padding: 10px 20px;
+                margin-bottom: 20px;
+                font-size: 20px;
+            }
+            .crystal-ball {
+                width: 60vw;
+                height: 60vw;
+                max-width: 350px;
+                max-height: 350px;
+                border-radius: 50%;
+                background-image: url('https://w7.pngwing.com/pngs/143/80/png-transparent-energy-ball-illustration-magic-8-ball-crystal-ball-magic-circle-purple-sphere-sports-thumbnail.png');
+                background-size: 160% 130%;
+                background-position: center;
+                background-repeat: no-repeat;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff;
+                font-size: 36px;
+                font-weight: bold;
+                border: 5px solid #a874f4;
+                margin-bottom: 20px;
+            }
+            input[type="text"] {
+                padding: 10px;
+                font-size: 16px;
+                margin-right: 10px;
+                border-radius: 5px;
+                border: 2px solid #a874f4;
+                width: 200px;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                border: none;
+                background-color: #a874f4;
+                color: #ffffff;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #7d5fb7;
+            }
+              `;
+        document.head.appendChild(style);
+
+        let container = document.createElement('div');
+        container.className = 'container';
+
+        let question = document.createElement('div');
+        question.className = 'question';
+        question.innerHTML = `
+            <input type="text" id="userQuestion" placeholder="Введіть ваше питання" />
+            <button id="askButton">Запитати</button>
+        `;
+        let crystalBall = document.createElement('div');
+        crystalBall.className = 'crystal-ball';
+        crystalBall.textContent = '...';  
+        container.appendChild(question);
+        container.appendChild(crystalBall);
+        document.body.appendChild(container);
+
+        document.getElementById('askButton').onclick = function () {
+            let userQuestion = document.getElementById('userQuestion').value.trim();
+
+            if (userQuestion === '') {
+                alert('Будь ласка, введіть ваше питання.');
+                return;
+            }
+            let possibleAnswers = ['Yes', 'No', 'I do not know'];
+            let randomIndex = Math.floor(Math.random() * possibleAnswers.length);
+            crystalBall.textContent = possibleAnswers[randomIndex];
+        };
+    });
+</script>
+</body>
+</html>
